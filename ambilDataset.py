@@ -3,9 +3,9 @@ import numpy as np
 import os
 
 
-path = "dataset"
+path = "dataset2"
 
-cap = cv.VideoCapture(0)
+cap = cv.VideoCapture(1)
 
 print("------ Program Ambil Dataset ------")
 print("tekan 'q' untuk keluar")
@@ -28,6 +28,8 @@ while(True):
 
     # cv.imshow('frame', resized)
     cv.imshow('crop', crop)
+
+    print(np.shape(crop))
 
     #if press 's' save image
     if cv.waitKey(1) & 0xFF == ord('s'):

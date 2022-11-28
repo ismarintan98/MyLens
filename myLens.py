@@ -70,37 +70,37 @@ images = normalisasi(images,0,255)
 Lens = LensModel()
 
 #load model jika suda pernah di train
-Lens.load_state_dict(torch.load("LensModel.pth"))
+Lens.load_state_dict(torch.load("LensModel2.pth"))
 
 criterion = nn.CrossEntropyLoss()
-optimizer = optim.SGD(Lens.parameters(), lr=0.001, momentum=0.9)
+optimizer = optim.SGD(Lens.parameters(), lr=0.001)
 
-# print("------ Program Training ------")
-# print("Jumlah data: ", len(images))
+print("------ Program Training ------")
+print("Jumlah data: ", len(images))
 
 
-# for epoch in range(30):  # loop over the dataset multiple times
-#     running_loss = 0.0
-#     for i in range(len(images)):
+for epoch in range(30):  # loop over the dataset multiple times
+    running_loss = 0.0
+    for i in range(len(images)):
 
-#         optimizer.zero_grad()
+        optimizer.zero_grad()
 
-#         outputs = Lens(images[i].unsqueeze(0))
-#         loss = criterion(outputs, labels[i])
+        outputs = Lens(images[i].unsqueeze(0))#forward
+        loss = criterion(outputs, labels[i])
 
-#         loss.backward()
-#         optimizer.step()
+        loss.backward()
+        optimizer.step()
 
-#         running_loss += loss.item()
+        running_loss += loss.item()
 
-#     if epoch % 10 == 9:
-#         print('[%d] loss: %.3f' %
-#               (epoch + 1, running_loss / len(images)))
-#         # running_loss = 0.0
+    if epoch % 10 == 9:
+        print('[%d] loss: %.3f' %
+              (epoch + 1, running_loss / len(images)))
+        # running_loss = 0.0
 
     
-#save model
-# torch.save(Lens.state_dict(), "LensModel.pth")
+# save model
+torch.save(Lens.state_dict(), "LensModel2.pth")
 
 
 
