@@ -49,6 +49,8 @@ numfile = len(os.listdir(datasetPATH))
 images = []
 labels = []
 
+
+
 for i in range(int(numfile)):
     if os.path.splitext(os.listdir(datasetPATH)[i])[1] == ".png":
         img = cv.imread(datasetPATH + "/" + os.listdir(datasetPATH)[i])

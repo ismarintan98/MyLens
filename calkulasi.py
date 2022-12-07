@@ -50,21 +50,34 @@ img = np.random.randint(0,255,(3,173,231))
 img = torch.from_numpy(img)
 img = img.unsqueeze(0)
 
-
-print(img.shape)
+print("Input shape: ", img.shape)
 
 input = img.float()
 conv1 = nn.Conv2d(3, 6, 25)
 x = conv1(input)
-print(x.shape)
+print("Layer Conv 1 shape: ", x.shape)
 pool = nn.MaxPool2d(2, 2)
 x = pool(x)
-print(x.shape)
+print("Layer Pool 1 shape: ", x.shape)
 conv2 = nn.Conv2d(6, 16, 10)
 x = conv2(x)
-print(x.shape)
+print("Layer Conv 2 shape: ", x.shape)
 x = pool(x)
-print(x.shape)
+print("Layer Pool 2 shape: ", x.shape)
+x = x.view(-1, 16 * 32 * 47)
+
+print("Layer input FC: ", x.shape)
+
+fc1 = nn.Linear(16 * 32 * 47, 120)
+print("Layer FC 1 shape: ", fc1(x).shape)
+fc2 = nn.Linear(120, 60)
+print("Layer FC 2 shape: ", fc2(fc1(x)).shape)
+fc3 = nn.Linear(60, 10)
+print("Layer FC 3 shape: ", fc3(fc2(fc1(x))).shape)
+
+
+
+
 
 
 # tens_input = torch.from_numpy(img, dtype=torch.float32)
